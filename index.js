@@ -25,6 +25,10 @@ async function bootstrap() {
         throw e;
     }
 
+    app.get('/', (_, res) => {
+        res.status(200).send('Well done you can reach your mongo database!');
+    });
+
     app.listen(port, () => {
         console.log(`App is listenning on port ${port}`);
     });
