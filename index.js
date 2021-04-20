@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+const { ApiCallModel } = require('./ApiCall');
 
 const port = Number(process.env.port || 80);
 const mongo_connection = process.env.mongo_connection;
@@ -24,6 +25,17 @@ async function bootstrap() {
         console.error('Error when connecting to mongodb database');
         throw e;
     }
+
+    app.use((req, _, next) => {
+        const apiCall = new ApiCallModel();
+        apiCall.url = req.path;
+        apiCall.save((err) => {
+            if (err) {
+                console.error(err);
+            }
+            next();
+        });
+    });
 
     app.get('/', (_, res) => {
         res.status(200).send('Well done you can reach your mongo database!');
