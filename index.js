@@ -29,7 +29,7 @@ async function bootstrap() {
 
     app.use((req, _, next) => {
         const apiCall = new ApiCallModel();
-        apiCall.url = req.path;
+        apiCall.path = req.path;
         apiCall.method = req.method;
         console.log(`Call on path: ${req.path} with method: ${req.method}`);
         apiCall.save((err) => {
@@ -47,7 +47,7 @@ async function bootstrap() {
     app.get('/apiCalls', async (_, res) => {
         try {
             const apiCalls = await ApiCallModel.find({});
-            const apiCallDTO = apiCalls.map(({ date, url, method }) => ({ date, url, method }));
+            const apiCallDTO = apiCalls.map(({ date, path, method }) => ({ date, path, method }));
             res.status(200).json(apiCallDTO);
         } catch(e) {
             console.error(e);

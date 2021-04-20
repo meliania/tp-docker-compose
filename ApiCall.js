@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const ApiCallSchema = new Schema({
-    url: { type: String },
+    path: { type: String },
     method: { type: String },
     date: { type: Date, default: Date.now },
 });
