@@ -1,11 +1,11 @@
-const { Schema, Model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const ApiCallSchema = new Schema({
     url: { type: String },
     date: { type: Date, default: Date.now },
 });
 
-const ApiCallModel = new Model('ApiCall', ApiCallSchema);
+const ApiCallModel = model('ApiCall', ApiCallSchema);
 
 module.exports = {
     ApiCallModel
