@@ -21,6 +21,7 @@ async function bootstrap() {
             useFindAndModify: false,
             useCreateIndex: true,
         });
+        console.log('Connection to mongodb done');
     } catch(e) {
         console.error('Error when connecting to mongodb database');
         throw e;
@@ -30,6 +31,7 @@ async function bootstrap() {
         const apiCall = new ApiCallModel();
         apiCall.url = req.path;
         apiCall.method = req.method;
+        console.log(`Call on path: ${req.path} with method: ${req.method}`);
         apiCall.save((err) => {
             if (err) {
                 console.error(err);
