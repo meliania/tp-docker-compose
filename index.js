@@ -44,7 +44,8 @@ async function bootstrap() {
     app.get('/apiCalls', async (_, res) => {
         try {
             const apiCalls = await ApiCallModel.find({});
-            res.status(200).send(apiCalls);
+            const apiCallDTO = apiCalls.map(({ date, url }) => ({ date, url }));
+            res.status(200).json(apiCallDTO);
         } catch(e) {
             console.error(e);
             res.status(500).send('Internal server error');
