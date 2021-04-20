@@ -41,6 +41,16 @@ async function bootstrap() {
         res.status(200).send('Well done you can reach your mongo database!');
     });
 
+    app.get('/apiCalls', async (_, res) => {
+        try {
+            const apiCalls = await ApiCallModel.find({});
+            res.status(200).send(apiCalls);
+        } catch(e) {
+            console.error(e);
+            res.status(500).send('Internal server error');
+        }
+    });
+
     app.listen(port, () => {
         console.log(`App is listenning on port ${port}`);
     });
