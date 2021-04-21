@@ -1,7 +1,7 @@
 version: '3'
 services:
   node:
-    build: tp-docker-compose
+    image: abdmel/tp-docker-compose
     ports:
       - 2300:80
     environment:
@@ -10,11 +10,9 @@ services:
       - network
   mongo:
     image: mongo
-    ports:
-      - 27017:27017
     networks:
       - network
-    volumes: 
+    volumes:
       - db:/data/db
 
 networks:
