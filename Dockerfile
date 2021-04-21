@@ -8,6 +8,6 @@ COPY . /app
 
 WORKDIR /app
 
-RUN yarn installl --production
+RUN yarn install --production
 
 CMD ["node", "index.js"]

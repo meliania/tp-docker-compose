@@ -1,15 +1,24 @@
 version: '3'
 services:
   node:
-    restart: always
     build: .
     ports:
-      - 80:3000
+      - 2300:80
+    environment:
+      - mongo_connection=mongodb://mongo:27017
+    networks:
+      - network
   mongo:
     image: mongo
     ports:
       - 27017:27017
-    volumes:
-      - mongodb:/data/db
+    networks:
+      - network
+    volumes: 
+      - db:/data/db
+
+networks:
+  network:
+    driver: bridge
 volumes:
- mongodb:
+  db:
