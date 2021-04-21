@@ -1,0 +1,30 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    
+    steps:
+    - uses: actions/checkout@v2
+  
+    - run: yarn install
+    - run: port=8080 yarn run test
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build and push 
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+            push: true
+            tags:  ${{ secrets.DOCKER_USER }}/tp-docker-compose:latest
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
