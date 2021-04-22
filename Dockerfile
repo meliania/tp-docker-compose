@@ -4,10 +4,7 @@ LABEL maintainer='kecsou'
 
 RUN mkdir /app
 
-COPY package.json /app
-COPY yarn.lock /app
-COPY index.js /app
-COPY src/ /app/src/
+COPY . .
 
 WORKDIR /app
 
