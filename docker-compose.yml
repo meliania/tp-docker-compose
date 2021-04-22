@@ -1,7 +1,7 @@
 version: '3'
 services:
   node:
-    image: abdmel/tp-docker-compose
+    build: .
     ports:
       - 2300:80
     environment:
